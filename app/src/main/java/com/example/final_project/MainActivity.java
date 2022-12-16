@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button startbutton;
-    TextView quotationtextview;
+    //TextView quotationtextview;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Movie APP");
         startbutton = findViewById(R.id.startbutton);
-        quotationtextview= findViewById(R.id.quotes);
+      //  quotationtextview= findViewById(R.id.quotes);
 
         startbutton.setOnClickListener(new View.OnClickListener() {
             @Override
