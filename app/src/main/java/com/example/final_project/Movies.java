@@ -8,23 +8,27 @@ public class Movies implements Parcelable {
     String title;
     String image;
     String date;
+    String language;
 
 
     public Movies() {
     }
 
-    public Movies(int id, String title, String image, String date) {
+    public Movies(int id, String title, String image, String date, String language) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.date = date;
+        this.language = language;
     }
+
 
     protected Movies(Parcel in) {
         id = in.readInt();
         title = in.readString();
         image = in.readString();
         date = in.readString();
+        language = in.readString();
     }
 
     public static final Creator<Movies> CREATOR = new Creator<Movies>() {
@@ -50,6 +54,7 @@ public class Movies implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(image);
         parcel.writeString(date);
+        parcel.writeString(language);
     }
 }
 

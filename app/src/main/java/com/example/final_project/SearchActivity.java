@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,7 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+      //  setShowSoftInputOnFocus(false);
 
         ((MyApp) getApplication()).networkingService.listener = this;
         moviesList = findViewById(R.id.movie_list);
@@ -33,7 +36,9 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
       //  ((MyApp)getApplication()).dbManager.listener = this;
       //  ((MyApp)getApplication()).dbManager.getDB(this);
         moviesList.setAdapter(adapter);
-        moviesList.setLayoutManager(new LinearLayoutManager(this));
+        moviesList.setLayoutManager(new GridLayoutManager(this,2));
+
+
     }
 
     @Override
@@ -46,16 +51,7 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //  Log.d("Donation app submit",query);
-//
-//                if (!query.isEmpty() ) {
-//                    ((MyApp) getApplication()).networkingService.getMovie(query);
-//                }
-//
-//                else {
-//                    adapter.list = new ArrayList<>(0);
-//                    adapter.notifyDataSetChanged();
-//                }
+
                 return false;
             }
 
@@ -81,19 +77,32 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
 
     @Override
     public void onClicked(int post) {
+
         Intent i = new Intent(this,DetailMoviePage.class);
         i.putExtra("title", (Parcelable) list.get(post));
         startActivity(i);
-      //  ((MyApp) getApplication()).networkingService.gettingDetails(list.get(post).id);
+
     }
 
     @Override
     public void gettingJsonIsCompleted(String json) {
-      list = JsonService.fromJsonToActivity(json);
-        adapter.list = list;
-        adapter.notifyDataSetChanged();
+        list = JsonService.fromJsonToActivity(json);
+        if(list.isEmpty()){
+            Toast.makeText(this, "Sorry The Movie You Looking For Is Not Available", Toast.LENGTH_SHORT).show();
+        }
+            adapter.list = list;
+            adapter.notifyDataSetChanged();
+
     }
 
+
+
+
+    @Override
+    public void gettingPosterIsCompleted(Bitmap image) {
+
+
+    }
 
 
 }

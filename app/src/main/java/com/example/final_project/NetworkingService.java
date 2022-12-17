@@ -1,5 +1,7 @@
 package com.example.final_project;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -19,14 +21,17 @@ public class NetworkingService {
 
     interface NetworkingListener{
         void gettingJsonIsCompleted(String json);
-       // void gettingImageIsCompleted(Bitmap image);
+       void gettingPosterIsCompleted(Bitmap image);
     }
+
     NetworkingListener listener;
     Handler handler = new Handler(Looper.getMainLooper());
 
   String movieURL="https://api.themoviedb.org/3/search/movie?api_key=741b0f74b1f6d573e68ff80851725422&query=";
   String movieDetailURL="https://api.themoviedb.org/3/movie/";
   String API = "?api_key=741b0f74b1f6d573e68ff80851725422";
+    String posterURL ="https://image.tmdb.org/t/p/original/";
+ // String posterURL="https://image.tmdb.org/t/p/w500/";
 
     public void getMovie(String query){
         String url = movieURL + query;
@@ -60,7 +65,7 @@ public class NetworkingService {
                        public void run() {
 
                            listener.gettingJsonIsCompleted(buffer.toString());
-                          // System.out.println(buffer.toString());
+
 
                        }
                    });
@@ -75,8 +80,37 @@ public class NetworkingService {
            }
        });
 
+    }
 
 
+        void gettingPoster(String posterpath) {
+        MyApp.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int value = 0;
+                    URL url = new URL(posterURL + posterpath);
+                    //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    InputStream in = url.openStream();//new BufferedInputStream(urlConnection.getInputStream());
+                    Bitmap imageData = BitmapFactory.decodeStream(in);
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.gettingPosterIsCompleted(imageData);
+                            System.out.println(imageData);
+                        }
+                    });
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
     }
 }
 

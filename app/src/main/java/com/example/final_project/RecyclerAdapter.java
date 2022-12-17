@@ -40,8 +40,8 @@ public class RecyclerAdapter extends
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         holder.moviename.setText(list.get(position).title);
-        holder.moviedate.setText(list.get(position).date);
-      //  holder.movieimage.(list.get(position).country);
+        holder.movielanguage.setText(list.get(position).language);
+     // holder.movieimage.setImageResource(Integer.parseInt(list.get(position).image));
     }
 
     @Override
@@ -54,13 +54,13 @@ public class RecyclerAdapter extends
             implements View.OnClickListener
     {
         TextView moviename;
-       // ImageView movieimage;
-        TextView moviedate;
+      //  ImageView movieimage;
+        TextView movielanguage;
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             moviename =  itemView.findViewById(R.id.moviename);
-       //     movieimage =  itemView.findViewById(R.id.movieimage);
-            moviedate = itemView.findViewById(R.id.date);
+       //   movieimage =  itemView.findViewById(R.id.movieimage);
+            movielanguage = itemView.findViewById(R.id.language);
             itemView.setOnClickListener(this);
         }
 
