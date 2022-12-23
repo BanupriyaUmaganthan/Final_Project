@@ -11,6 +11,8 @@ public class MoviesDBManager {
     interface DataBaseListener{
         void insertingMovieCompleted();
         void gettingMovieCompleted(Movies[] list);
+        void movieChecked(int ans);
+        void sorted(Movies[] lis);
     }
 
     DataBaseListener listener;
@@ -68,6 +70,37 @@ public class MoviesDBManager {
 
     }
 
+    void movieExistCheck(int id){
+        MyApp.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+             int ans =  movieDatabase.getDao().isDataExist(id);
+                dbHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // notify main thread
+                        listener.movieChecked(ans);
+                    }
+                });
+            }
+        });
+    }
+
+    void sortlanguage(String la){
+        MyApp.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Movies[] lis =  movieDatabase.getDao().sortbyLanguage(la);
+                dbHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // notify main thread
+                        listener.sorted(lis);
+                    }
+                });
+            }
+        });
+    }
 
 
 }

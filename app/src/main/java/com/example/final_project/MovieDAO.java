@@ -16,4 +16,12 @@ public interface MovieDAO {
     @Delete
     void deleteAFavMovie(Movies dm);
 
+
+    @Query("SELECT * FROM Movies WHERE id = :mid")
+    int isDataExist(int mid);
+
+    @Query("select * from Movies[] where language = :lan")
+    Movies[] sortbyLanguage(String lan);
+
+
 }

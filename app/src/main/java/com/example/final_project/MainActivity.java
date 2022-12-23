@@ -88,24 +88,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityAdapt
                 startActivity(favintent);
 
                 break;
-//            case R.id.deleteAllToDo:
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setMessage("Are you sure you want to delete all tasks??");
-//                builder.setNegativeButton(R.string.alert_no,null);
-//                builder.setPositiveButton(R.string.alert_yes,new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//
-//                        ((MyApp)getApplication()).fileStorageManager.deleteAllToDos(MainActivity.this);
-//                        ((MyApp)getApplication()).setList(
-//                                ((MyApp)getApplication()).fileStorageManager.
-//                                        readAllToDos(MainActivity.this));
-//
-//                        adapter.list = ((MyApp)getApplication()).getList();
-//                        adapter.notifyDataSetChanged();
-//                    }
-               // });
-//                builder.create().show();
-//                break;
+
 
         }
 

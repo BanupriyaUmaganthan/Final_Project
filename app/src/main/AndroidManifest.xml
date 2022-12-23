@@ -21,8 +21,11 @@
             android:name=".FavoriteMovies"
             android:exported="false">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:name="android.app.lib_name"
+                android:value="" />
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value=".MainActivity"/>-->
         </activity>
         <activity
             android:name=".DetailMoviePage"

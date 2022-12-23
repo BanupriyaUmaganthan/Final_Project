@@ -21,7 +21,7 @@ MoviesDBManager.DataBaseListener{
             TextView overview,websitelink,relstatus,extradetails;
             ImageView imageposter;
             Button addbutton;
-            Boolean buttonpressed = false;
+
     Movies movies;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,9 +44,10 @@ MoviesDBManager.DataBaseListener{
        extradetails = findViewById(R.id.extradetails);
        addbutton=findViewById(R.id.addtofav);
        addbutton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
+           @Override
                                         public void onClick(View view) {
-                                            showAlert();
+               ((MyApp)getApplication()).moviesDBManager.movieExistCheck(movies.id);
+
                                         }
 
           });
@@ -57,13 +58,9 @@ void showAlert(){
               builder.setNegativeButton("No",null);
                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
-                       buttonpressed = true;
                      ((MyApp)getApplication()).moviesDBManager.insertNewMovieAsync(movies);
-                       addbutton.setText("ADDED");
                        Intent in = new Intent(DetailMoviePage.this,SearchActivity.class);
                        startActivity(in);
-
-
                    }
                });
               builder.create().show();
@@ -92,7 +89,6 @@ void showAlert(){
         websitelink.setText("NO WEBSITE LINK AVAILABLE");
     }else{
     websitelink.setText(movieDetails.homepage);
-
     }
     relstatus.setText("Release status: "+movieDetails.Status+"\n"+"Date:"+movies.date);
     extradetails.setText("Runtime :"+movieDetails.runtime +"mins"+"       "+"Language :"+movieDetails.language);
@@ -108,4 +104,24 @@ void showAlert(){
     public void gettingMovieCompleted(Movies[] list) {
 
     }
+
+    @Override
+    public void movieChecked(int ans) {
+        int ex = ans;
+        if(ex == 0){
+            showAlert();
+        }else {
+            addbutton.setText("ALREADY ADDED");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage( movies.title + " Already Exists In Your List");
+            builder.setNegativeButton("Ok",null);
+            builder.create().show();
+        }
+    }
+
+    @Override
+    public void sorted(Movies[] lis) {
+
+    }
+
 }

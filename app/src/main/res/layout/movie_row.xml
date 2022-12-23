@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/LightYellow">
+    android:background="@color/black">
 
 
     <TextView
         android:id="@+id/moviename"
-        android:layout_width="123dp"
+        android:layout_width="match_parent"
         android:layout_height="53dp"
         android:gravity="center"
         style="@style/TextAppearance.AppCompat.Title"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/language"
-        android:layout_width="123dp"
+        android:layout_width="match_parent"
         android:layout_height="27dp"
         android:gravity="center"
         style="@style/TextAppearance.AppCompat.Body1"
@@ -37,21 +37,21 @@
         app:layout_constraintTop_toBottomOf="@+id/moviename"
         app:layout_constraintVertical_bias="1.0" />
 
-    <Button
-        android:id="@+id/favbut"
-        android:gravity="top|right"
-        android:layout_marginRight="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+<!--    <Button-->
+<!--        android:id="@+id/favbut"-->
+<!--        android:gravity="top|right"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
 
-        android:background="@drawable/ic_baseline_favorite_border_24"
-        app:layout_constraintEnd_toEndOf="@+id/language"
-        app:layout_constraintTop_toTopOf="@+id/language"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--        android:background="@drawable/ic_baseline_favorite_border_24"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/language"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/language"-->
+<!--        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
     <ImageView
         android:id="@+id/movieimage"
-        android:layout_width="123dp"
+        android:layout_width="match_parent"
         android:layout_height="148dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"

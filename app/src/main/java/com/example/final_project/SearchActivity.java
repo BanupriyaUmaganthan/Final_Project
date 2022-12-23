@@ -99,57 +99,57 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
 
     }
 
-    @Override
-    public void butClicked(int post) {
-        if (!list.get(post).favb) {
-            list.get(post).favb = true;
-            //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
-
-            Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
-
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setMessage("Are you sure you want to save " + list.get(post).title + " to your favourites");
-//            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    adapter.list = list;
-//                    adapter.notifyDataSetChanged();
+//    @Override
+//    public void butClicked(int post) {
+//        if (!list.get(post).favb) {
+//            list.get(post).favb = true;
+//            //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
 //
-//                }
-//            });
-//            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int id) {
+//            Toast.makeText(this, "Added", Toast.LENGTH_SHORT).show();
 //
-//                    //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
+////            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+////            builder.setMessage("Are you sure you want to save " + list.get(post).title + " to your favourites");
+////            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+////                @Override
+////                public void onClick(DialogInterface dialogInterface, int i) {
+////                    adapter.list = list;
+////                    adapter.notifyDataSetChanged();
+////
+////                }
+////            });
+////            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+////                public void onClick(DialogInterface dialog, int id) {
+////
+////                    //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
+////
+////                }
+////            });
+////            builder.create().show();
 //
-//                }
-//            });
-//            builder.create().show();
-
-
-        }else{
-            list.get(post).favb = false;
-            //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
-
-            Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
-
-
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setMessage("Are you sure you want to remove " + list.get(post).title + " from your favourites");
-//            builder.setNegativeButton("No", null);
-//            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int id) {
 //
-//                    adapter.list = new ArrayList<>(0);
-//                    adapter.notifyDataSetChanged();
-//                    //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
+//        }else{
+//            list.get(post).favb = false;
+//            //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
 //
-//                }
-//            });
-//            builder.create().show();
+//            Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
 //
-//               }
-        }}
+//
+////            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+////            builder.setMessage("Are you sure you want to remove " + list.get(post).title + " from your favourites");
+////            builder.setNegativeButton("No", null);
+////            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+////                public void onClick(DialogInterface dialog, int id) {
+////
+////                    adapter.list = new ArrayList<>(0);
+////                    adapter.notifyDataSetChanged();
+////                    //((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
+////
+////                }
+////            });
+////            builder.create().show();
+////
+////               }
+//        }}
 
     @Override
     public void gettingJsonIsCompleted(String json) {
@@ -159,7 +159,6 @@ public class SearchActivity extends AppCompatActivity implements RecyclerAdapter
             builder.setMessage("The Movie You Looking For Is Not Available");
             builder.setNegativeButton("Ok",null);
             builder.create().show();
-           // Toast.makeText(this, "Sorry The Movie You Looking For Is Not Available", Toast.LENGTH_SHORT).show();
         }
             adapter.list = list;
             adapter.notifyDataSetChanged();

@@ -23,7 +23,7 @@ public class RecyclerAdapter extends
 
     interface ItemListener{
         void onClicked(int post);
-        void butClicked(int post);
+       // void butClicked(int post);
     }
 
     Context context;
@@ -69,30 +69,30 @@ public class RecyclerAdapter extends
         TextView moviename;
        ImageView movieimage;
         TextView movielanguage;
-        Button favbut;
+       // Button favbut;
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             moviename =  itemView.findViewById(R.id.moviename);
         movieimage =  itemView.findViewById(R.id.movieimage);
             movielanguage = itemView.findViewById(R.id.language);
-            favbut = itemView.findViewById(R.id.favbut);
+            //favbut = itemView.findViewById(R.id.favbut);
             itemView.setOnClickListener(this);
-            favbut.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.butClicked(getAdapterPosition());
-                    if (list.get(getAdapterPosition()).favb == true) {
-
-                        favbut.setBackground( context.getResources().getDrawable(R.drawable.ic_baseline_favorite_24,null));
-                    }
-                    else{
-                        favbut.setBackground(  context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24,null));
-
-                    }
-
-
-                }
-            });
+//            favbut.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    listener.butClicked(getAdapterPosition());
+//                    if (list.get(getAdapterPosition()).favb == true) {
+//
+//                        favbut.setBackground( context.getResources().getDrawable(R.drawable.ic_baseline_favorite_24,null));
+//                    }
+//                    else{
+//                        favbut.setBackground(  context.getResources().getDrawable(R.drawable.ic_baseline_favorite_border_24,null));
+//
+//                    }
+//
+//
+//                }
+//            });
         }
 
         @Override

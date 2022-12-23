@@ -1,13 +1,20 @@
 package com.example.final_project;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +35,7 @@ public class FavoriteMovies extends AppCompatActivity implements MoviesDBManager
         adapter = new RecyclerAdapter(this, flist);
         adapter.listener = this;
         favmoviesList.setAdapter(adapter);
-        favmoviesList.setLayoutManager(new LinearLayoutManager(this));
+        favmoviesList.setLayoutManager(new GridLayoutManager(this,2));
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT) {
@@ -40,11 +47,24 @@ public class FavoriteMovies extends AppCompatActivity implements MoviesDBManager
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(FavoriteMovies.this, " Deleted ", Toast.LENGTH_SHORT).show();
-                //Remove swiped item from list and notify the RecyclerView
-                int position = viewHolder.getAdapterPosition();
-                ((MyApp)getApplication()).moviesDBManager.delAMovie(flist.remove(position));
-                adapter.notifyDataSetChanged();
+                int position  = viewHolder.getAdapterPosition();
+                AlertDialog.Builder builder = new AlertDialog.Builder(FavoriteMovies.this);
+                builder.setMessage("Are you sure you want to remove " + flist.get(position).title +" from favourites");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Remove swiped item from list and notify the RecyclerView
+                        ((MyApp)getApplication()).moviesDBManager.delAMovie(flist.remove(position));
+                        adapter.notifyDataSetChanged();
+
+                    }
+                });
+                builder.create().show();
 
             }
         };
@@ -78,11 +98,17 @@ public class FavoriteMovies extends AppCompatActivity implements MoviesDBManager
 
     }
 
+    @Override
+    public void movieChecked(int ans) {
 
+    }
 
-
-
-
+    @Override
+    public void sorted(Movies[] lis) {
+        flist = new ArrayList( Arrays.asList(lis));
+        adapter.list = flist;
+        adapter.notifyDataSetChanged();
+    }
 
 
     @Override
@@ -93,7 +119,51 @@ public class FavoriteMovies extends AppCompatActivity implements MoviesDBManager
     }
 
     @Override
-    public void butClicked(int post) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater mi = new MenuInflater(FavoriteMovies.this);
+        mi.inflate(R.menu.languagemenu,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.en:
+                String lang = "en";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(lang);
+
+                break;
+            case R.id.fr:
+                String l1 = "fr";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l1);
+                break;
+            case R.id.ta:
+                String l2 = "ta";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l2);
+                break;
+            case R.id.ml:
+                String l3 = "ml";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l3);
+                break;
+            case R.id.te:
+                String l4 = "te";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l4);
+                break;
+            case R.id.hi:
+                String l5 = "hi";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l5);
+                break;
+            case R.id.Ja:
+                String l6 = "ja";
+                ((MyApp)getApplication()).moviesDBManager.sortlanguage(l6);
+                break;
+            case R.id.all:
+                ((MyApp)getApplication()).moviesDBManager.getAllMovies();
+                break;
+
+        }
+
+        return true;
     }
 }

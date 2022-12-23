@@ -17,9 +17,8 @@ public class JsonService {
         try {
             JSONObject jsonObject = new JSONObject(jsonString);
             JSONArray resultArray = jsonObject.getJSONArray("results");
-            int page = jsonObject.getInt("page");
-            int total_page = jsonObject.getInt("total_pages");
-          // if(page <= total_page) {
+//            int page = jsonObject.getInt("page");
+//            int total_page = jsonObject.getInt("total_pages");
 
                 for (int i = 0; i < resultArray.length(); i++) {
 
@@ -34,10 +33,7 @@ public class JsonService {
 
 
             }
-               //}else
-           //{
 
-           //}
         } catch (JSONException e) {
             e.printStackTrace();
         }
