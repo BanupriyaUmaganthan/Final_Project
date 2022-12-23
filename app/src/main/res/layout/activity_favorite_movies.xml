@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity"
-    android:background="@color/GhostWhite">
+    tools:context=".FavoriteMovies">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movie_list"
+        android:id="@+id/favMovielist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

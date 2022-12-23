@@ -29,7 +29,7 @@ public class JsonService {
                     String jsonPoster = resultArray.getJSONObject(i).getString("poster_path");
                     String jsonDate = resultArray.getJSONObject(i).getString("release_date");
                     String jsonLanguage = resultArray.getJSONObject(i).getString("original_language");
-                    Movies movies = new Movies(jsonid, jsontitle, jsonPoster, jsonDate,jsonLanguage);
+                    Movies movies = new Movies(jsonid, jsontitle, jsonPoster, jsonDate,jsonLanguage,false);
                     list.add(movies);
 
 
@@ -70,5 +70,34 @@ public class JsonService {
     }
 
 
+    static ArrayList<poster> post(String jsonString){
+        ArrayList<poster> plist = new ArrayList<>(0);
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray resultArray = jsonObject.getJSONArray("results");
 
-}
+            for (int i = 0; i < resultArray.length(); i++) {
+
+                resultArray.getString(i);
+
+                String Poster = resultArray.getJSONObject(i).getString("poster_path");
+
+                poster p = new poster(Poster);
+                        plist.add(p);
+
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return plist;
+
+    }
+
+
+    }
+
+

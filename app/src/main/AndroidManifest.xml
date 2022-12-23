@@ -15,20 +15,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_Project"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".FavoriteMovies"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
         <activity
             android:name=".DetailMoviePage"
             android:exported="false">
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".SearchActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SearchActivity" />
         </activity>
         <activity
             android:name=".SearchActivity"
             android:exported="false">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
         <activity
             android:name=".MainActivity"

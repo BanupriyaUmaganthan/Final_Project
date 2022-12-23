@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -12,19 +13,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class DetailMoviePage extends AppCompatActivity implements NetworkingService.NetworkingListener {
+public class DetailMoviePage extends AppCompatActivity implements NetworkingService.NetworkingListener ,
+MoviesDBManager.DataBaseListener{
             MovieDetails movieDetails = new MovieDetails();
             TextView overview,websitelink,relstatus,extradetails;
             ImageView imageposter;
             Button addbutton;
-
+            Boolean buttonpressed = false;
     Movies movies;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie_page);
+        ((MyApp)getApplication()).moviesDBManager.getDB(this);
+        ((MyApp)getApplication()).moviesDBManager.listener = this;
         if( getIntent().hasExtra("title")){
             movies = getIntent().getParcelableExtra("title");
             this.setTitle(movies.title);
@@ -50,12 +55,17 @@ void showAlert(){
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
               builder.setMessage("Are you sure you want to save "+ movies.title +" to your favourites");
               builder.setNegativeButton("No",null);
-               builder.setPositiveButton("Yes",null);
-                    //   new DialogInterface.OnClickListener() {
-//                   public void onClick(DialogInterface dialog, int id) {
-//                       ((MyApp)getApplication()).dbManager.insertNewCityAsync(city);
-//                   }
-//               });
+               builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       buttonpressed = true;
+                     ((MyApp)getApplication()).moviesDBManager.insertNewMovieAsync(movies);
+                       addbutton.setText("ADDED");
+                       Intent in = new Intent(DetailMoviePage.this,SearchActivity.class);
+                       startActivity(in);
+
+
+                   }
+               });
               builder.create().show();
 
 
@@ -85,8 +95,17 @@ void showAlert(){
 
     }
     relstatus.setText("Release status: "+movieDetails.Status+"\n"+"Date:"+movies.date);
-        extradetails.setText("Runtime :"+movieDetails.runtime +"mins"+"       "+"Language :"+movieDetails.language);
+    extradetails.setText("Runtime :"+movieDetails.runtime +"mins"+"       "+"Language :"+movieDetails.language);
     }
 
 
+    @Override
+    public void insertingMovieCompleted() {
+        finish();
+    }
+
+    @Override
+    public void gettingMovieCompleted(Movies[] list) {
+
+    }
 }

@@ -31,7 +31,7 @@ public class NetworkingService {
   String movieDetailURL="https://api.themoviedb.org/3/movie/";
   String API = "?api_key=741b0f74b1f6d573e68ff80851725422";
     String posterURL ="https://image.tmdb.org/t/p/original/";
- // String posterURL="https://image.tmdb.org/t/p/w500/";
+
 
     public void getMovie(String query){
         String url = movieURL + query;
@@ -41,6 +41,10 @@ public class NetworkingService {
         String url2 = movieDetailURL+id+API;
         connect(url2);
 
+    }
+    public void getpic(){
+        String posterUrl="https://api.themoviedb.org/3/movie/upcoming?api_key=741b0f74b1f6d573e68ff80851725422&language=en-US&page=1";
+        connect(posterUrl);
     }
 
 
@@ -90,8 +94,7 @@ public class NetworkingService {
                 try {
                     int value = 0;
                     URL url = new URL(posterURL + posterpath);
-                    //HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream in = url.openStream();//new BufferedInputStream(urlConnection.getInputStream());
+                    InputStream in = url.openStream();
                     Bitmap imageData = BitmapFactory.decodeStream(in);
 
                     handler.post(new Runnable() {
