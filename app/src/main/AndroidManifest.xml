@@ -18,14 +18,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".FavMovieDetail"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FavoriteMovies" />
+        </activity>
+        <activity
             android:name=".FavoriteMovies"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value=".MainActivity"/>-->
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value=".MainActivity"/> -->
         </activity>
         <activity
             android:name=".DetailMoviePage"
@@ -39,7 +46,7 @@
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".MainActivity"

@@ -113,7 +113,7 @@ public class FavoriteMovies extends AppCompatActivity implements MoviesDBManager
 
     @Override
     public void onClicked(int post) {
-        Intent i = new Intent(this,DetailMoviePage.class);
+        Intent i = new Intent(this,FavMovieDetail.class);
         i.putExtra("title", (Parcelable) flist.get(post));
         startActivity(i);
     }
